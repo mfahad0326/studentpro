@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentPro — Contact</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">StudentPro ✦</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="tools.html" style="display:flex;align-items:center;gap:4px">
+        Tools <span class="dropdown-arrow">▾</span>
+      </a>
+      <div class="nav-dropdown-menu">
+        <a class="dropdown-item" href="tools.html?tool=age">
+          <div class="di-icon">🎂</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Age Finder</strong><br><span style="font-size:11px;color:var(--muted)">DOB → Exact Age</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=cgpa">
+          <div class="di-icon">🎓</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">CGPA Calculator</strong><br><span style="font-size:11px;color:var(--muted)">University Grading</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=image">
+          <div class="di-icon">🖼️</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Image Compressor</strong><br><span style="font-size:11px;color:var(--muted)">Resize & Compress</span></div>
+        </a>
+      </div>
+    </div>
+    <a href="blog.html">Blog</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero" style="background:radial-gradient(ellipse at 70% 50%,rgba(124,58,237,.08) 0%,transparent 65%)">
+    <div class="page-hero-inner">
+      <div class="section-tag">📬 Get In Touch</div>
+      <h1 class="section-title" style="margin-bottom:8px">Contact Us</h1>
+      <p class="section-sub">Questions, feedback or just a hello — we would love to hear from you.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- LEFT INFO -->
+        <div class="fade-up">
+          <h3 class="contact-info" style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;margin-bottom:14px">Let's Talk 👋</h3>
+          <p style="color:var(--muted2);line-height:1.7;margin-bottom:28px;font-size:15px">
+            Have a question about the tools? Want to suggest a feature? Found a bug? Or just want to say hi — fill the form and we'll get back to you.
+          </p>
+
+          <div class="c-item fade-up">
+            <div class="c-icon">📧</div>
+            <div class="c-item-text">
+              <p>Email</p>
+              <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="65060a0b11040611250803040d04014b03100b">[email&#160;protected]</a></p>
+            </div>
+          </div>
+
+          <div class="c-item fade-up">
+            <div class="c-icon">📍</div>
+            <div class="c-item-text">
+              <p>Location</p>
+              <p>Lahore, Punjab, Pakistan</p>
+            </div>
+          </div>
+
+          <div class="c-item fade-up">
+            <div class="c-icon">🕐</div>
+            <div class="c-item-text">
+              <p>Response Time</p>
+              <p>Usually within 24 hours</p>
+            </div>
+          </div>
+
+          <div class="c-item fade-up">
+            <div class="c-icon">💬</div>
+            <div class="c-item-text">
+              <p>WhatsApp / Chat</p>
+              <p>Available 10am – 10pm PKT</p>
+            </div>
+          </div>
+
+          <!-- Mini illustration -->
+          <div style="margin-top:32px;padding:24px;background:linear-gradient(135deg,rgba(255,94,26,.08),rgba(124,58,237,.08));border:1px solid rgba(255,94,26,.15);border-radius:20px;text-align:center">
+            <div style="font-size:44px;margin-bottom:12px">✨</div>
+            <p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;margin-bottom:8px">We're improving every day</p>
+            <p style="font-size:13px;color:var(--muted2);line-height:1.6">Your feedback directly shapes what features we build next. Don't hesitate to share your ideas!</p>
+          </div>
+        </div>
+
+        <!-- RIGHT FORM -->
+        <div class="card fade-up" style="padding:36px">
+          <div class="card-title" style="margin-bottom:28px"><div class="card-icon">📨</div> Send a Message</div>
+
+          <div class="form-2col" style="margin-bottom:18px">
+            <div>
+              <label class="form-label">Your Name *</label>
+              <input type="text" id="cName" placeholder="Name" style="margin-bottom:0">
+            </div>
+            <div>
+              <label class="form-label">Email Address *</label>
+              <input type="email" id="cEmail" placeholder="you@example.com" style="margin-bottom:0">
+            </div>
+          </div>
+
+          <label class="form-label">Subject</label>
+          <input type="text" id="cSubject" placeholder="What's this about?">
+
+          <label class="form-label">Message *</label>
+          <textarea id="cMsg" placeholder="Write your message here…" style="min-height:140px"></textarea>
+
+          <button class="btn btn-orange btn-full" onclick="submitContact()">📨 Send Message</button>
+
+          <div class="success-toast" id="contactToast">
+            ✅ Message sent successfully! We'll get back to you within 24 hours.
+          </div>
+
+          <p style="font-size:12px;color:var(--muted);margin-top:14px;text-align:center">
+            We never share your email with anyone. Promise! 🔒
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <hr class="divider" style="margin-bottom:72px">
+      <div style="text-align:center;margin-bottom:48px" class="fade-up">
+        <div class="section-tag">❓ FAQ</div>
+        <h2 class="section-title">Quick Answers</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+        <div class="card fade-up">
+          <div style="font-size:28px;margin-bottom:12px">🎓</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:10px">Is the CGPA calculator accurate?</h4>
+          <p style="color:var(--muted2);font-size:13.5px;line-height:1.7">Yes! It uses the official Superior University grading scale (A = 85%+, GP 4.00) exactly as per their academic regulations.</p>
+        </div>
+        <div class="card fade-up">
+          <div style="font-size:28px;margin-bottom:12px">🖼️</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:10px">Is my image uploaded to a server?</h4>
+          <p style="color:var(--muted2);font-size:13.5px;line-height:1.7">No! Image compression happens entirely in your browser using the Canvas API. Your images never leave your device.</p>
+        </div>
+        <div class="card fade-up">
+          <div style="font-size:28px;margin-bottom:12px">📝</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:10px">Can I add my own blog posts?</h4>
+          <p style="color:var(--muted2);font-size:13.5px;line-height:1.7">Yes! Go to the Blog page, enable Admin Mode, and fill in the form. Posts are saved in your browser's local storage.</p>
+        </div>
+        <div class="card fade-up">
+          <div style="font-size:28px;margin-bottom:12px">🆓</div>
+          <h4 style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:10px">Is StudentPro free to use?</h4>
+          <p style="color:var(--muted2);font-size:13.5px;line-height:1.7">Completely free! No login, no sign-up, no ads. Just open and use — that's how it should be for students.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- end .page -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-logo">StudentPro ✦</span>
+  <p>© 2026 MFahad — Made with ❤️ in Lahore</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="tools.html">Tools</a>
+    <a href="blog.htm

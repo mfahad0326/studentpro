@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentPro — Tools</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── TOOLS TABS ── */
+.tools-tabs{
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:28px 48px;
+  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,.015);
+  position:sticky;top:68px;z-index:100;
+  backdrop-filter:blur(20px);
+}
+@media(max-width:900px){.tools-tabs{padding:18px 20px;}}
+.tool-tab{
+  display:flex;align-items:center;gap:9px;
+  padding:10px 20px;border-radius:50px;
+  border:1px solid var(--border2);
+  background:transparent;color:var(--muted2);
+  font-family:'Syne',sans-serif;font-size:13.5px;font-weight:700;
+  cursor:pointer;transition:all .22s;
+}
+.tool-tab .tab-icon{font-size:18px;}
+.tool-tab:hover{color:var(--text);border-color:rgba(255,94,26,.35);background:rgba(255,94,26,.08);}
+.tool-tab.active{
+  color:#fff;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  border-color:transparent;
+  box-shadow:0 8px 22px rgba(255,94,26,.35);
+}
+
+/* All styles handled in style.css */
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">StudentPro ✦</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="tools.html" class="active" style="display:flex;align-items:center;gap:4px">
+        Tools <span class="dropdown-arrow">▾</span>
+      </a>
+      <div class="nav-dropdown-menu">
+        <a class="dropdown-item" href="tools.html?tool=age">
+          <div class="di-icon">🎂</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Age Finder</strong><br><span style="font-size:11px;color:var(--muted)">DOB → Exact Age</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=cgpa">
+          <div class="di-icon">🎓</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">CGPA Calculator</strong><br><span style="font-size:11px;color:var(--muted)">University Grading</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=image">
+          <div class="di-icon">🖼️</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Image Compressor</strong><br><span style="font-size:11px;color:var(--muted)">Resize & Compress</span></div>
+        </a>
+      </div>
+    </div>
+    <a href="blog.html">Blog</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-tag">⚙️ Utilities</div>
+      <h1 class="section-title" style="margin-bottom:8px">Student Tools</h1>
+      <p class="section-sub">Select a tool below — only that tool is shown, no clutter.</p>
+    </div>
+  </div>
+
+  <!-- TOOL TABS -->
+  <div class="tools-tabs">
+    <button class="tool-tab" data-tool="age" onclick="showTool('age')">
+      <span class="tab-icon">🎂</span> Age Finder
+    </button>
+    <button class="tool-tab" data-tool="cgpa" onclick="showTool('cgpa')">
+      <span class="tab-icon">🎓</span> CGPA Calculator
+    </button>
+    <button class="tool-tab" data-tool="image" onclick="showTool('image')">
+      <span class="tab-icon">🖼️</span> Image Compressor
+    </button>
+  </div>
+
+  <!-- ════════ AGE TOOL ════════ -->
+  <div class="tool-section tools-main" id="age">
+    <div style="max-width:520px;margin:0 auto">
+      <div class="card">
+        <div class="card-title"><div class="card-icon">🎂</div> Age Finder</div>
+
+        <label class="form-label">Year of Birth</label>
+        <input type="number" id="birthYear" placeholder="e.g. 2002" min="1900" max="2025">
+
+        <label class="form-label">Month of Birth</label>
+        <select id="birthMonth">
+          <option value="0">January</option><option value="1">February</option>
+          <option value="2">March</option><option value="3">April</option>
+          <option value="4">May</option><option value="5">June</option>
+          <option value="6">July</option><option value="7">August</option>
+          <option value="8">September</option><option value="9">October</option>
+          <option value="10">November</option><option value="11">December</option>
+        </select>
+
+        <label class="form-label">Day of Birth</label>
+        <input type="number" id="birthDay" placeholder="e.g. 15" min="1" max="31">
+
+        <div class="err-box" id="ageError"></div>
+        <button class="btn btn-orange btn-full" onclick="calculateAge()" style="margin-top:4px">🎂 Calculate My Age</button>
+
+        <div class="result-reveal" id="ageResult"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ CGPA TOOL ════════ -->
+  <div class="tool-section tools-main" id="cgpa">
+    <div class="cgpa-layout" id="cgpaLayout">
+
+      <!-- LEFT / CENTER: Form -->
+      <div class="cgpa-form-col">
+        <div class="card" style="padding:34px 38px">
+          <div class="card-title" style="font-size:22px;margin-bottom:28px">
+            <div class="card-icon" style="width:46px;height:46px;font-size:22px">🎓</div>
+            CGPA Calculator
+          </div>
+
+          <label class="form-label">Select University</label>
+          <select id="cgpaUniversity" style="font-size:15px;padding:14px 18px">
+            <option>Superior University</option>
+            <option>University of Lahore</option>
+            <option>Punjab University</option>
+            <option>UET Lahore</option>
+            <option>FAST Lahore</option>
+            <option>COMSATS Lahore</option>
+            <option>UCP Lahore</option>
+          </select>
+
+          <div style="margin:24px 0 12px">
+            <div class="row-header">
+              <span>Course Name</span>
+              <span class="ch-hdr">Credit Hrs</span>
+              <span>Marks %</span>
+              <span></span>
+            </div>
+            <div id="subjectRows"></div>
+          </div>
+
+          <div style="margin-bottom:28px">
+            <button class="btn btn-ghost" onclick="addSubject()" style="padding:11px 22px;font-size:14px">+ Add Course</button>
+          </div>
+
+          <div class="err-box" id="cgpaError"></div>
+          <button class="btn btn-orange btn-full" onclick="calculateCGPA()" style="padding:16px;font-size:16px">🎓 Calculate CGPA</button>
+
+          <div class="result-reveal" id="cgpaResult"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Grading scale — appears after calculate -->
+      <div class="grade-ref-col" id="gradeRefCol">
+        <div class="card">
+          <div class="card-title" style="font-size:15px;margin-bottom:14px">
+            <div class="card-icon" style="width:34px;height:34px;font-size:15px">📊</div>
+            Grading Scale
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5">
+            Superior University — Official % → GP
+          </p>
+          <div id="gradeTableContainer"></div>
+          <div style="margin-top:14px;padding:11px 13px;background:rgba(255,94,26,.07);border:1px solid rgba(255,94,26,.15);border-radius:10px;font-size:12px;color:var(--muted2);line-height:1.7">
+            <strong style="color:var(--orange);display:block;margin-bottom:4px">🏆 Scholarship</strong>
+            CGPA ≥ 3.70 → Eligible<br>
+            <span style="opacity:.7">Formula: QP ÷ Total CH</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════ IMAGE COMPRESSOR ════════ -->
+  <div class="tool-section tools-main" id="image">
+    <div style="max-width:600px;margin:0 auto">
+      <div class="card">
+        <div class="card-title"><div class="card-icon">🖼️</div> Image Compressor</div>
+
+        <label class="form-label">Upload Image</label>
+        <input type="file" id="imageInput" accept="image/*" onchange="previewOriginal()">
+
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-bottom:0">
+          <div>
+            <label class="form-label">Target Size</label>
+            <input type="number" id="targetSize" placeholder="e.g. 200" min="1" style="margin-bottom:0">
+          </div>
+          <div style="padding-bottom:18px">
+            <select id="targetUnit" style="margin-bottom:0;width:80px">
+              <option value="kb">KB</option>
+              <option value="mb">MB</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">OR Quality %</label>
+            <input type="number" id="qualityPct" placeholder="1–100" value="70" min="1" max="100" style="margin-bottom:0">
+          </div>
+        </div>
+        <p style="font-size:11.5px;color:var(--muted);margin:8px 0 20px">Enter Target Size OR Quality %. Target Size takes priority if both filled.</p>
+
+        <div class="err-box" id="compError"></div>
+        <button class="btn btn-teal btn-full" onclick="compressImage()">🗜️ Compress Image</button>
+
+        <!-- Result -->
+        <div class="result-reveal" id="imgResultWrap">
+          <div class="img-stats">
+            <div class="img-stat"><div class="img-stat-val" id="origSize">—</div><div class="img-stat-lbl">Original</div></div>
+            <div class="img-stat"><div class="img-stat-val" id="compSize">—</div><div class="img-stat-lbl">Compressed</div></div>
+            <div class="img-stat"><div class="img-stat-val" id="savedPct">—</div><div class="img-stat-lbl">Saved</div></div>
+          </div>
+          <div class="img-compare">
+            <div class="img-box"><img id="origPreview" src="" alt="Original"><p>Original</p></div>
+            <div class="img-box"><img id="compPreview" src="" alt="Compressed"><p>Compressed</p></div>
+          </div>
+          <a id="downloadLink">
+            <button class="btn btn-teal btn-full">⬇️ Download Compressed Image</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .page -->
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-logo">StudentPro ✦</span>
+  <p>© 2026 MFahad — Made with ❤️ in Lahore</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="tools.html">Tools</a>
+    <a href="blog.html">Blog</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+// Read ?tool= param to open the right tab
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const tool   = params.get('tool') || 'age';
+  const valid  = ['age','cgpa','image'];
+  showTool(valid.includes(tool) ? tool : 'age');
+
+  // CGPA: seed 3 rows
+  addSubject(); addSubject(); addSubject();
+})();
+</script>
+</body>
+</html>

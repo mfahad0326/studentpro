@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudentPro — Blog</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">StudentPro ✦</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <div class="nav-dropdown">
+      <a href="tools.html" style="display:flex;align-items:center;gap:4px">
+        Tools <span class="dropdown-arrow">▾</span>
+      </a>
+      <div class="nav-dropdown-menu">
+        <a class="dropdown-item" href="tools.html?tool=age">
+          <div class="di-icon">🎂</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Age Finder</strong><br><span style="font-size:11px;color:var(--muted)">DOB → Exact Age</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=cgpa">
+          <div class="di-icon">🎓</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">CGPA Calculator</strong><br><span style="font-size:11px;color:var(--muted)">University Grading</span></div>
+        </a>
+        <a class="dropdown-item" href="tools.html?tool=image">
+          <div class="di-icon">🖼️</div><div><strong style="font-size:13px;font-family:'Syne',sans-serif">Image Compressor</strong><br><span style="font-size:11px;color:var(--muted)">Resize & Compress</span></div>
+        </a>
+      </div>
+    </div>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="section-tag">📝 Student Blog</div>
+      <h1 class="section-title" style="margin-bottom:8px">Latest Posts</h1>
+      <p class="section-sub">Tips, guides and insights to help you excel in university life.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- ADMIN TOGGLE -->
+      <div class="admin-bar fade-up">
+        <label class="toggle-wrap">
+          <input type="checkbox" id="adminToggle" onchange="toggleAdmin()">
+          <div class="toggle-track"></div>
+        </label>
+        <div style="flex:1">
+          <strong style="font-size:14px">Admin Mode</strong>
+          <span style="color:var(--muted);font-size:13px;display:block" id="adminStatusText">Enable to add / delete posts</span>
+        </div>
+        <button id="logoutBtn" onclick="adminLogout()" style="display:none;padding:8px 18px;border-radius:50px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);color:#f87171;font-size:13px;font-weight:600;cursor:pointer;font-family:'Syne',sans-serif;transition:all .2s"
+          onmouseover="this.style.background='rgba(239,68,68,.3)'"
+          onmouseout="this.style.background='rgba(239,68,68,.15)'">
+          🔒 Logout
+        </button>
+      </div>
+
+      <!-- ADMIN LOGIN MODAL -->
+      <div id="adminLoginOverlay" style="display:none;position:fixed;inset:0;z-index:3000;background:rgba(7,7,15,.92);backdrop-filter:blur(24px);align-items:center;justify-content:center;padding:24px;">
+        <div style="background:#0e0e1c;border:1px solid rgba(255,94,26,.25);border-radius:28px;padding:44px 40px;max-width:420px;width:100%;animation:mIn .3s cubic-bezier(.34,1.56,.64,1);position:relative;">
+          <button onclick="cancelAdminLogin()" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#f2ede8;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
+
+          <div style="text-align:center;margin-bottom:32px">
+            <div style="width:64px;height:64px;border-radius:18px;margin:0 auto 18px;background:linear-gradient(135deg,rgba(255,94,26,.3),rgba(30,64,175,.3));display:flex;align-items:center;justify-content:center;font-size:28px;">🔐</div>
+            <h3 style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">Admin Login</h3>
+            <p style="color:rgba(242,237,232,.5);font-size:14px">Enter credentials to access admin panel</p>
+          </div>
+
+          <label style="display:block;font-size:11px;letter-spacing:.8px;text-transform:uppercase;font-weight:700;color:rgba(242,237,232,.42);margin-bottom:8px">Username</label>
+          <input type="text" id="adminUser" placeholder="Enter username"
+            style="width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);border-radius:12px;color:#f2ede8;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;outline:none;margin-bottom:16px;transition:all .2s"
+            onkeydown="if(event.key==='Enter')document.getElementById('adminPass').focus()"
+            onfocus="this.style.borderColor='rgba(255,94,26,.5)';this.style.boxShadow='0 0 0 3px rgba(255,94,26,.1)'"
+            onblur="this.style.borderColor='rgba(255,255,255,.13)';this.style.boxShadow='none'">
+
+          <label style="display:block;font-size:11px;letter-spacing:.8px;text-transform:uppercase;font-weight:700;color:rgba(242,237,232,.42);margin-bottom:8px">Password</label>
+          <div style="position:relative;margin-bottom:8px">
+            <input type="password" id="adminPass" placeholder="Enter password"
+              style="width:100%;padding:13px 48px 13px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.13);border-radius:12px;color:#f2ede8;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;outline:none;transition:all .2s"
+              onkeydown="if(event.key==='Enter')checkAdminLogin()"
+              onfocus="this.style.borderColor='rgba(255,94,26,.5)';this.style.boxShadow='0 0 0 3px rgba(255,94,26,.1)'"
+              onblur="this.style.borderColor='rgba(255,255,255,.13)';this.style.boxShadow='none'">
+            <button onclick="togglePassVis()" id="passEye" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(242,237,232,.45);font-size:18px;cursor:pointer;padding:4px;">👁</button>
+          </div>
+
+          <div id="loginError" style="display:none;margin-bottom:16px;padding:10px 14px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:10px;color:#f87171;font-size:13.5px;text-align:center;">❌ Incorrect username or password</div>
+
+          <button onclick="checkAdminLogin()" style="width:100%;padding:14px;border-radius:50px;border:none;cursor:pointer;background:linear-gradient(135deg,#ff5e1a,#ff8c5a);color:#fff;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;box-shadow:0 8px 22px rgba(255,94,26,.4);transition:all .22s;margin-top:4px;"
+            onmouseover="this.style.transform='translateY(-2px)'"
+            onmouseout="this.style.transform='translateY(0)'">🔓 Login to Admin</button>
+        </div>
+      </div>
+
+      <!-- EDITOR PANEL -->
+      <div class="editor-panel" id="editorPanel">
+        <div class="card-title" style="margin-bottom:24px"><div class="card-icon">✍️</div> New Post</div>
+        <div class="editor-grid">
+          <div>
+            <label class="form-label">Post Title *</label>
+            <input type="text" id="postTitle" placeholder="Enter post title…">
+
+            <label class="form-label">Category / Tag</label>
+            <input type="text" id="postTag" placeholder="e.g. Study Tips, CGPA, University Life">
+
+            <label class="form-label">Short Description * <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted)">(shown on card)</span></label>
+            <textarea id="postDesc" placeholder="2–3 lines summary visible on the card…" style="min-height:90px"></textarea>
+          </div>
+          <div>
+            <label class="form-label">Cover Image URL <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted)">(optional — paste direct image link)</span></label>
+            <input type="text" id="postImgUrl" placeholder="https://…" oninput="previewBlogImg()">
+            <img id="blogImgSmall" class="img-small-prev" src="" alt="Preview">
+
+            <label class="form-label" style="margin-top:12px">Full Content * <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--muted)">(each line = new paragraph)</span></label>
+            <textarea id="postContent" placeholder="Write your full blog post here…&#10;Use empty lines to separate paragraphs." style="min-height:115px"></textarea>
+          </div>
+        </div>
+        <button class="btn btn-orange" onclick="publishPost()" style="margin-top:8px">🚀 Publish Post</button>
+      </div>
+
+      <!-- BLOG GRID -->
+      <div class="blog-grid" id="blogGrid"></div>
+
+    </div>
+  </section>
+
+</div><!-- end .page -->
+
+<!-- BLOG MODAL -->
+<div class="modal-overlay" id="blogModal">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-logo">StudentPro ✦</span>
+  <p>© 2026 MFahad — Made with ❤️ in Lahore</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="tools.html">Tools</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  renderBlogGrid('blogGrid');
+</script>
+</body>
+</html>
